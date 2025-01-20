@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # http://localhost:3000/posts のURLでindex.html.erbが表示される
   # http://localhost:3000/posts/new のURLでnew.html.erbが表示される
   # http://localhost:3000/posts/create のURLでcreate.html.erbが表示される
-  resources :posts, only: [:index, :new, :create]
+  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
 end
