@@ -48,6 +48,7 @@ class PostsController < ApplicationController
   # private 修飾子以降に定義した関数は、このファイル内でしか呼び出せなくなる
   private
   def post_params
+    # form_withを使ったフォームを作成すると、model: post の部分で定義した変数(post)がキーとしてサーバに送られる
     # params.require(:post): リクエストから post というキーを取り出して、そのデータへのアクセスを許可
     # permit(:title, :content): postから、取り出すフィールドを指定。この場合、title と content のみ
     params.require(:post).permit(:title, :content)

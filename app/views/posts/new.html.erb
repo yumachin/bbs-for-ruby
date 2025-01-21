@@ -1,6 +1,8 @@
 <h1>新しい投稿</h1>
 
 <!-- @post: コントローラーのnewアクションで定義した変数 -->
+<!-- postという名前でサーバーにデータが送信される -->
+<!-- それによって、posts.controllerにおいて、params.require(:post)とすることができる -->
 <%= form_with model: @post, class: "form-container" do |form| %>
   <div class="form-input">
     <!-- :title: title属性を付ける -->
