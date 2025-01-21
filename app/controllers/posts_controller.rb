@@ -3,6 +3,7 @@
 class PostsController < ApplicationController
   # routesのonlyで設定したアクションを定義
 
+  before_action :set_post, only: [:edit, :update, :destroy]
   # index(new)アクションに対して、index(new).html.erbという名前にする必要あり
   # Post: models(post.rb)で作成したクラス
   def index
@@ -18,7 +19,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      # posts_path: Rails で定義されているもの( rails routes で一覧できる)
+      # posts_path: Rails で定義されているもの( rails routes | grep posts で一覧できる)
       redirect_to posts_path
     else
       # new ビューを再描画
@@ -27,11 +28,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -40,17 +39,21 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
   end
 
   # private 修飾子以降に定義した関数は、このファイル内でしか呼び出せなくなる
   private
+  # パラメーターはここに記述する
   def post_params
     # form_withを使ったフォームを作成すると、model: post の部分で定義した変数(post)がキーとしてサーバに送られる
     # params.require(:post): リクエストから post というキーを取り出して、そのデータへのアクセスを許可
     # permit(:title, :content): postから、取り出すフィールドを指定。この場合、title と content のみ
     params.require(:post).permit(:title, :content)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
